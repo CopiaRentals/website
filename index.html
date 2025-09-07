@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Copia Rentals</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    font-family: sans-serif;
+  }
+  section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .section-content {
+    max-width: 90%;
+  }
+  video.bg-video {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+  }
+  /* Optional: gradient overlays */
+  .overlay {
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background-color: rgba(0,0,0,0.5);
+    z-index:0;
+  }
+</style>
+</head>
+<body>
+
+<section class="relative">
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="https://cdn.pixabay.com/video/2016/05/12/3134-166335905_small.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <div class="section-content text-white">
+    <h1 class="text-[clamp(2rem,6vw,4rem)] font-extrabold uppercase tracking-tight drop-shadow-lg">Copia Rentals</h1>
+    <p class="text-[clamp(1rem,2vw,1.25rem)] mt-2">Partnering with academic institutions to lease temporarily vacant on-campus housing.</p>
+  </div>
+</section>
+
+<section class="bg-gradient-to-br from-blue-600 via-cyan-500 to-green-400 text-white">
+  <div class="section-content">
+    <h2 class="text-[clamp(1.5rem,5vw,2.5rem)] font-bold mb-4">Our Mission</h2>
+    <p class="text-[clamp(1rem,2vw,1.25rem)]">We help colleges maximize resources by renting out unused dorms to trusted tenants during off-peak seasons, providing affordable short-term housing while supporting institutional budgets.</p>
+  </div>
+</section>
+
+<section class="bg-gradient-to-br from-indigo-600 via-blue-500 to-gray-100 text-white">
+  <div class="section-content flex flex-col items-center">
+    <h2 class="text-[clamp(1.5rem,5vw,2.5rem)] font-bold mb-4">Case Study: River Trail Village</h2>
+    <p class="text-[clamp(1rem,2vw,1.25rem)] mb-4">We partnered with River Trail Village, a 588-bed, three-building apartment complex on the campus of Napa Valley College in Napa, CA. Copia Rentals has launched an omnichannel marketing effort, increasing leasing activity and supporting student housing growth.</p>
+    <img src="https://www.hpiarchitecture.com/wp-content/uploads/2022/01/DSCF0558.jpg" 
+         class="w-full max-w-2xl max-h-[50vh] rounded-xl object-cover shadow-lg" 
+         alt="River Trail Village">
+  </div>
+</section>
+
+<section class="bg-gradient-to-br from-purple-700 via-indigo-700 to-blue-800 text-white">
+  <div class="section-content bg-white/10 backdrop-blur-md shadow-2xl rounded-2xl p-6 md:p-8 max-w-md mx-auto">
+    <h2 class="text-[clamp(1.25rem,4vw,2rem)] font-bold mb-4">College Partnerships</h2>
+    <p class="text-[clamp(0.9rem,2vw,1rem)] mb-4">Learn more about how we collaborate with institutions to maximize housing opportunities.</p>
+    <button class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition">Schedule a Meeting</button>
+    <p class="text-[clamp(0.75rem,1.5vw,0.9rem)] text-gray-200 mt-4">&copy; 2025 Copia Rentals. All rights reserved.</p>
+  </div>
+</section>
+
+<script>
+  // One-page scroll JS
+  const sections = document.querySelectorAll('section');
+  let isScrolling = false;
+  let currentIndex = 0;
+
+  function scrollToSection(index) {
+    if(index < 0) index = 0;
+    if(index >= sections.length) index = sections.length - 1;
+    isScrolling = true;
+    sections[index].scrollIntoView({behavior:'smooth'});
+    currentIndex = index;
+    setTimeout(()=> { isScrolling=false }, 1000); // prevent rapid scroll
+  }
+
+  window.addEventListener('wheel', (e)=>{
+    if(isScrolling) return;
+    if(e.deltaY > 0) scrollToSection(currentIndex+1);
+    if(e.deltaY < 0) scrollToSection(currentIndex-1);
+  });
+
+  window.addEventListener('keydown', (e)=>{
+    if(isScrolling) return;
+    if(e.key==='ArrowDown') scrollToSection(currentIndex+1);
+    if(e.key==='ArrowUp') scrollToSection(currentIndex-1);
+  });
+</script>
+
+</body>
+</html>
